@@ -2,6 +2,15 @@ package zoo
 
 import "fmt"
 
+type AnimalInterface interface {
+	Run()
+	GetName() string
+}
+
+type AnumalsInSluce struct {
+	Animals []Animal
+}
+
 type Animal struct {
 	Name    string
 	Species string
@@ -48,6 +57,14 @@ type Leopard struct {
 	IsNotFunnyAtAll bool
 }
 
+type AnimalsInSlice struct {
+	Animals []AnimalInterface
+}
+
+func (s *AnimalsInSlice) AddAnimal(i AnimalInterface) {
+	s.Animals = append(s.Animals, i)
+}
+
 func (p Puma) Run() {
 	fmt.Printf("%v %v over %vkgs is escaping from the zoo holding its tail high\n", p.Color, p.Name, p.Weight)
 }
@@ -66,4 +83,32 @@ func (p Panda) Run() {
 
 func (p Leopard) Run() {
 	fmt.Printf("%v hunting for a prey! And it's quite dangerous!\n", p.Name)
+}
+
+func (a Animal) Run() {
+	fmt.Printf("%v hunting for a prey! And it's quite dangerous!\n", a.Name)
+}
+
+func (a Animal) GetName() string {
+	return a.Name
+}
+
+func (p Puma) GetColor() string {
+	return p.Color
+}
+
+func (c Chimpanzee) GetColor() string {
+	return c.Color
+}
+
+func (e Elephant) GetColor() string {
+	return e.Color
+}
+
+func (l Leopard) GetColor() string {
+	return l.Color
+}
+
+func (p Panda) GetColor() string {
+	return p.Color
 }

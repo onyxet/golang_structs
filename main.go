@@ -1,6 +1,8 @@
 package main
 
-import "structs/pkg/zoo"
+import (
+	"structs/pkg/zoo"
+)
 
 /*
 0. Declaration
@@ -22,6 +24,8 @@ import "structs/pkg/zoo"
 */
 
 func main() {
+	// Define slice of animals
+	zooAnimals := zoo.AnimalsInSlice{}
 	// Struct declaration
 	somePanda := zoo.Panda{
 		Animal: zoo.Animal{
@@ -34,6 +38,7 @@ func main() {
 		Weight:   100,
 		IsLovely: true,
 	}
+	zooAnimals.AddAnimal(somePanda)
 	somePuma := zoo.Puma{
 		Animal: zoo.Animal{
 			Name:    "Liza",
@@ -44,6 +49,7 @@ func main() {
 		Color:    "Black",
 		Weight:   50,
 	}
+	zooAnimals.AddAnimal(somePuma)
 	someElephant := zoo.Elephant{
 		Animal: zoo.Animal{
 			Name:    "Dumbo",
@@ -55,6 +61,7 @@ func main() {
 		Weight:      500,
 		LoveBanas:   true,
 	}
+	zooAnimals.AddAnimal(someElephant)
 	someChimpanzee := zoo.Chimpanzee{
 		Animal: zoo.Animal{
 			Name:    "Bobo",
@@ -66,6 +73,7 @@ func main() {
 		Weight:  70,
 		IsFunny: true,
 	}
+	zooAnimals.AddAnimal(someChimpanzee)
 	someLeopard := zoo.Leopard{
 		Animal: zoo.Animal{
 			Name:    "Leo",
@@ -78,6 +86,7 @@ func main() {
 		Weight:          80,
 		IsNotFunnyAtAll: true,
 	}
+	zooAnimals.AddAnimal(someLeopard)
 	someZookeeper := zoo.Zookeeper{
 		Human: zoo.Human{
 			Name:    "John",
@@ -87,28 +96,30 @@ func main() {
 		BachelorDegree: true,
 		ComputerSkills: true,
 	}
-
 	someCage := zoo.Cage{
 		Enclosure: zoo.Enclosure{
 			Size:     100.2,
 			Material: "Steel",
 		},
 		Purpose: "Predators",
+		Animals: make([]zoo.AnimalInterface, 0),
 	}
 	windOfChange := zoo.MagicWind{}
 
 	someZookeeper.Introduction()
 	someZookeeper.OnDuty()
 	someZookeeper.OffDuty()
-	someCage.Close()
+	someCage.Closed(zooAnimals)
 	windOfChange.Magic()
 	someCage.Open()
 	somePanda.Run()
 	somePuma.Run()
+	someZookeeper.IsCatchingAnimal(somePuma)
+	someZookeeper.PutAnimalToCage(somePuma, &someCage)
+	someZookeeper.CheckWhatInCage(&someCage)
 	someElephant.Run()
-	someChimpanzee.Run()
+	someZookeeper.PutAnimalToCage(someChimpanzee, &someCage)
+	someZookeeper.CheckWhatInCage(&someCage)
 	someLeopard.Run()
-
-	someZookeeper.IsCatchingAnimals()
 	someZookeeper.EscapingFromAnimals()
 }
