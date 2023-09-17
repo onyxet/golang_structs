@@ -6,8 +6,7 @@ import (
 )
 
 func main() {
-	//var choice int
-	//world.WelcomeMsg()
+	world.WelcomeMsg()
 	asylum := world.NewAsylum()
 	pers := character.NewProtagonist()
 
