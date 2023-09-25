@@ -40,17 +40,12 @@ func (p *Player) Move(b *Board) {
 	fmt.Println("Please select your movement (1-9):")
 	fmt.Scanln(&movement)
 
-	// Convert movement to row and column indices (0-based).
 	row := (movement - 1) / 3
 	col := (movement - 1) % 3
 
-	// Check if the selected cell is empty.
 	if b.Rows[row][col] != "[]" {
 		fmt.Println("Invalid movement. The cell is already occupied.")
 		return
 	}
-
-	// Update the selected cell with the player's symbol.
 	b.Rows[row][col] = "[" + p.Symbol + "]"
-
 }
