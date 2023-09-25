@@ -1,6 +1,9 @@
 package main
 
-import "structs/pkg/game"
+import (
+	"fmt"
+	"structs/pkg/game"
+)
 
 func main() {
 	var takenSymbol string
@@ -14,11 +17,10 @@ func main() {
 	for {
 		board.Display()
 		currentPlayer.Move(board)
-
-		// Check for a win condition or a tie (not shown in this example).
-		// You can add your win/tie condition check here and break out of the loop if needed.
-
-		// Alternate between players.
+		if board.CheckWinner(currentPlayer) {
+			fmt.Printf("%v is the Winner!\n", currentPlayer.Name)
+			break
+		}
 		if currentPlayer == player1 {
 			currentPlayer = player2
 		} else {
