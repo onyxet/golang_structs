@@ -17,14 +17,5 @@ func (r *Route) GetAllVehicles() {
 }
 
 func (r *Route) AddVehicleToRoute(v Vehicle) {
-	switch v.(type) {
-	case *Car:
-		r.Vehicles = append(r.Vehicles, v)
-	case *Train:
-		r.Vehicles = append(r.Vehicles, v)
-	case *Airplane:
-		r.Vehicles = append(r.Vehicles, v)
-	default:
-		panic("Seems like you are trying to add an unknown vehicle to the route")
-	}
+	r.Vehicles = append(r.Vehicles, v)
 }
