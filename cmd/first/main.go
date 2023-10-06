@@ -1,13 +1,14 @@
 package main
 
 import (
-	"structs/pkg/first"
+	"fmt"
+	"os"
+	"structs/pkg/cmd"
 )
 
 func main() {
-	nums := make(chan int)
-	avg := make(chan float32)
-	go first.GenerateRandomNums(nums)
-	go first.FindAvg(nums, avg)
-	first.PrintAvg(avg)
+	if err := cmd.RootCmd.Execute(); err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
 }
