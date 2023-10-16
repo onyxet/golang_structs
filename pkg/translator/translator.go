@@ -6,10 +6,11 @@ import (
 	"golang.org/x/text/language"
 	"google.golang.org/api/option"
 	"google.golang.org/api/translate/v2"
+	"os"
 )
 
 func CreateTranslateClient() (*translate.Service, error) {
-	jsonKeyPath := "./home-lab-232620-e815cc794f9b.json" // Replace with the path to your JSON key file
+	jsonKeyPath := os.Getenv("GOOGLE_APPLICATION_CREDENTIALS")
 	ctx := context.Background()
 
 	client, err := translate.NewService(ctx, option.WithCredentialsFile(jsonKeyPath))
