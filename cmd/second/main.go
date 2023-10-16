@@ -50,7 +50,5 @@ func main() {
 		go second.FakeResults(ctx, answers, playerRounds[i])
 	}
 
-	go second.FakeGenerateRoundGame(ctx, playerRounds, *ticker)
-
-	time.Sleep(5 * time.Minute)
+	second.FakeGenerateRoundGame(ctx, playerRounds, *ticker)
 }
