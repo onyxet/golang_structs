@@ -6,7 +6,20 @@ import (
 )
 
 func tasks(w http.ResponseWriter, r *http.Request) {
-	resp, err := json.MarshalIndent(FakeTasks, "", "  ")
+	queryParams := r.URL.Query()
+	dateParam := queryParams.Get("date")
+
+	var filteredTasks []Task
+	if dateParam != "" {
+		for _, task := range FakeTasks {
+			if task.Date == dateParam {
+				filteredTasks = append(filteredTasks, task)
+			}
+		}
+	} else {
+		filteredTasks = FakeTasks
+	}
+	resp, err := json.MarshalIndent(filteredTasks, "", "  ")
 	if err != nil {
 		http.Error(w, "Error marshalling JSON", http.StatusInternalServerError)
 		return
